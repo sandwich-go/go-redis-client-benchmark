@@ -1,0 +1,19 @@
+redis:
+  cluster: false
+  master_name:
+  addrs:
+    - 127.0.0.1:6379
+  key_sizes:
+    - 16
+  value_sizes:
+    - 64
+    - 256
+    - 1024
+  pool_sizes:
+    - 100
+    - 1000
+  parallelisms:
+    - 1
+    - 8
+    - 16
+    - 32
