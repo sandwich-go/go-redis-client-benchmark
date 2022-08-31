@@ -15,6 +15,7 @@ require (
 	github.com/sandwich-go/redisson v1.1.14
 	github.com/sandwich-go/xconf v0.3.22
 	github.com/valyala/fastrand v1.1.0
+	go.uber.org/automaxprocs v1.5.1
 )
 
 //replace github.com/sandwich-go/redisson => ../redisson

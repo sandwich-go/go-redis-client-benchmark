@@ -32,13 +32,13 @@ func BenchmarkClientGet(b *testing.B) {
 				return client.Get(ctx, key).Err()
 			}
 		}),
-		newRedissonRESP3CacheTargetBuilder(cfg, func(client redisson.Cmdable, benchmark Benchmark) error {
-			return client.Set(ctx, benchmark.Key, benchmark.Val, 0).Err()
-		}, func(client redisson.CacheCmdable) TargetAction {
-			return func(key string, value string) error {
-				return client.Get(ctx, key).Err()
-			}
-		}),
+		//newRedissonRESP3CacheTargetBuilder(cfg, func(client redisson.Cmdable, benchmark Benchmark) error {
+		//	return client.Set(ctx, benchmark.Key, benchmark.Val, 0).Err()
+		//}, func(client redisson.CacheCmdable) TargetAction {
+		//	return func(key string, value string) error {
+		//		return client.Get(ctx, key).Err()
+		//	}
+		//}),
 		newRueidisTargetBuilder(cfg, func(client rueidiscompat.Cmdable, benchmark Benchmark) error {
 			return client.Set(ctx, benchmark.Key, benchmark.Val, 0).Err()
 		}, func(client rueidiscompat.Cmdable) TargetAction {
@@ -46,13 +46,13 @@ func BenchmarkClientGet(b *testing.B) {
 				return client.Get(ctx, key).Err()
 			}
 		}),
-		newRueidisCacheTargetBuilder(cfg, func(client rueidiscompat.Cmdable, benchmark Benchmark) error {
-			return client.Set(ctx, benchmark.Key, benchmark.Val, 0).Err()
-		}, func(client rueidiscompat.CacheCompat) TargetAction {
-			return func(key string, value string) error {
-				return client.Get(ctx, key).Err()
-			}
-		}),
+		//newRueidisCacheTargetBuilder(cfg, func(client rueidiscompat.Cmdable, benchmark Benchmark) error {
+		//	return client.Set(ctx, benchmark.Key, benchmark.Val, 0).Err()
+		//}, func(client rueidiscompat.CacheCompat) TargetAction {
+		//	return func(key string, value string) error {
+		//		return client.Get(ctx, key).Err()
+		//	}
+		//}),
 		newGoRedisTargetBuilder(cfg, func(client redis.UniversalClient, benchmark Benchmark) error {
 			return client.Set(ctx, benchmark.Key, benchmark.Val, 0).Err()
 		}, func(client redis.UniversalClient) TargetAction {

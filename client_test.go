@@ -15,6 +15,7 @@ import (
 	"github.com/sandwich-go/go-redis-client-benchmark/config"
 	"github.com/sandwich-go/redisson"
 	"github.com/valyala/fastrand"
+	_ "go.uber.org/automaxprocs"
 	"strings"
 	"testing"
 	"time"

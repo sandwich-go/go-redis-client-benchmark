@@ -40,13 +40,13 @@ func BenchmarkClientTTL(b *testing.B) {
 				return client.TTL(ctx, key).Err()
 			}
 		}),
-		newRueidisCacheTargetBuilder(cfg, func(client rueidiscompat.Cmdable, benchmark Benchmark) error {
-			return client.Set(ctx, benchmark.Key, benchmark.Val, 3600*time.Second).Err()
-		}, func(client rueidiscompat.CacheCompat) TargetAction {
-			return func(key string, value string) error {
-				return client.TTL(ctx, key).Err()
-			}
-		}),
+		//newRueidisCacheTargetBuilder(cfg, func(client rueidiscompat.Cmdable, benchmark Benchmark) error {
+		//	return client.Set(ctx, benchmark.Key, benchmark.Val, 3600*time.Second).Err()
+		//}, func(client rueidiscompat.CacheCompat) TargetAction {
+		//	return func(key string, value string) error {
+		//		return client.TTL(ctx, key).Err()
+		//	}
+		//}),
 		newGoRedisTargetBuilder(cfg, func(client redis.UniversalClient, benchmark Benchmark) error {
 			return client.Set(ctx, benchmark.Key, benchmark.Val, 3600*time.Second).Err()
 		}, func(client redis.UniversalClient) TargetAction {

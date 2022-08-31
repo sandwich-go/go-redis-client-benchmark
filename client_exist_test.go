@@ -32,13 +32,13 @@ func BenchmarkClientExists(b *testing.B) {
 				return client.Exists(ctx, key).Err()
 			}
 		}),
-		newRedissonRESP3CacheTargetBuilder(cfg, func(client redisson.Cmdable, benchmark Benchmark) error {
-			return client.Set(ctx, benchmark.Key, benchmark.Val, 0).Err()
-		}, func(client redisson.CacheCmdable) TargetAction {
-			return func(key string, value string) error {
-				return client.Exists(ctx, key).Err()
-			}
-		}),
+		//newRedissonRESP3CacheTargetBuilder(cfg, func(client redisson.Cmdable, benchmark Benchmark) error {
+		//	return client.Set(ctx, benchmark.Key, benchmark.Val, 0).Err()
+		//}, func(client redisson.CacheCmdable) TargetAction {
+		//	return func(key string, value string) error {
+		//		return client.Exists(ctx, key).Err()
+		//	}
+		//}),
 		newRueidisTargetBuilder(cfg, func(client rueidiscompat.Cmdable, benchmark Benchmark) error {
 			return client.Set(ctx, benchmark.Key, benchmark.Val, 0).Err()
 		}, func(client rueidiscompat.Cmdable) TargetAction {
