@@ -14,6 +14,7 @@ redis:
     - 1000
   parallelisms:
     - 1
+    - 4
     - 8
     - 16
     - 32
