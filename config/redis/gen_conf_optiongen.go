@@ -10,13 +10,13 @@ import (
 
 // Conf should use NewConf to initialize it
 type Conf struct {
-	Addrs        []string `xconf:"addrs" usage:"Redis地址列表"`
-	Cluster      bool     `xconf:"cluster" usage:"是否为Redis集群，默认为false，集群需要设置为true"`
-	MasterName   string   `xconf:"master_name" usage:"哨兵模式master名"`
-	KeySizes     []int    `xconf:"key_sizes" usage:"key的大小"`
-	ValueSizes   []int    `xconf:"value_sizes" usage:"value的大小"`
-	PoolSizes    []int    `xconf:"pool_sizes" usage:"连接池的大小"`
-	Parallelisms []int    `xconf:"parallelisms" usage:"并发"`
+	Addrs      []string `xconf:"addrs" usage:"Redis地址列表"`
+	Cluster    bool     `xconf:"cluster" usage:"是否为Redis集群，默认为false，集群需要设置为true"`
+	MasterName string   `xconf:"master_name" usage:"哨兵模式master名"`
+	KeySizes   []int    `xconf:"key_sizes" usage:"key的大小"`
+	ValueSizes []int    `xconf:"value_sizes" usage:"value的大小"`
+	PoolSizes  []int    `xconf:"pool_sizes" usage:"连接池的大小"`
+	Mode       Mode     `xconf:"mode" usage:"运行模式"`
 }
 
 // NewConf new Conf
@@ -100,12 +100,12 @@ func WithPoolSizes(v ...int) ConfOption {
 	}
 }
 
-// WithParallelisms 并发
-func WithParallelisms(v ...int) ConfOption {
+// WithMode 运行模式
+func WithMode(v Mode) ConfOption {
 	return func(cc *Conf) ConfOption {
-		previous := cc.Parallelisms
-		cc.Parallelisms = v
-		return WithParallelisms(previous...)
+		previous := cc.Mode
+		cc.Mode = v
+		return WithMode(previous)
 	}
 }
 
@@ -125,8 +125,8 @@ func newDefaultConf() *Conf {
 		WithMasterName(""),
 		WithKeySizes([]int{16}...),
 		WithValueSizes([]int{64, 256, 1024}...),
-		WithPoolSizes([]int{10, 100, 1000}...),
-		WithParallelisms([]int{1, 8, 16, 32}...),
+		WithPoolSizes([]int{100, 1000}...),
+		WithMode(ModeSerial),
 	} {
 		opt(cc)
 	}
@@ -172,13 +172,13 @@ func AtomicConf() ConfVisitor {
 }
 
 // all getter func
-func (cc *Conf) GetAddrs() []string     { return cc.Addrs }
-func (cc *Conf) GetCluster() bool       { return cc.Cluster }
-func (cc *Conf) GetMasterName() string  { return cc.MasterName }
-func (cc *Conf) GetKeySizes() []int     { return cc.KeySizes }
-func (cc *Conf) GetValueSizes() []int   { return cc.ValueSizes }
-func (cc *Conf) GetPoolSizes() []int    { return cc.PoolSizes }
-func (cc *Conf) GetParallelisms() []int { return cc.Parallelisms }
+func (cc *Conf) GetAddrs() []string    { return cc.Addrs }
+func (cc *Conf) GetCluster() bool      { return cc.Cluster }
+func (cc *Conf) GetMasterName() string { return cc.MasterName }
+func (cc *Conf) GetKeySizes() []int    { return cc.KeySizes }
+func (cc *Conf) GetValueSizes() []int  { return cc.ValueSizes }
+func (cc *Conf) GetPoolSizes() []int   { return cc.PoolSizes }
+func (cc *Conf) GetMode() Mode         { return cc.Mode }
 
 // ConfVisitor visitor interface for Conf
 type ConfVisitor interface {
@@ -188,7 +188,7 @@ type ConfVisitor interface {
 	GetKeySizes() []int
 	GetValueSizes() []int
 	GetPoolSizes() []int
-	GetParallelisms() []int
+	GetMode() Mode
 }
 
 // ConfInterface visitor + ApplyOption interface for Conf

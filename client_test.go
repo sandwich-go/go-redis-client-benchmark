@@ -13,9 +13,10 @@ import (
 	"github.com/rueian/rueidis"
 	"github.com/rueian/rueidis/rueidiscompat"
 	"github.com/sandwich-go/go-redis-client-benchmark/config"
+	redisConfig "github.com/sandwich-go/go-redis-client-benchmark/config/redis"
 	"github.com/sandwich-go/redisson"
 	"github.com/valyala/fastrand"
-	_ "go.uber.org/automaxprocs"
+	"runtime"
 	"strings"
 	"testing"
 	"time"
@@ -95,7 +96,7 @@ type Benchmark struct {
 	PoolSize      int
 	TargetBuilder TargetBuilder
 	RedisMode     RedisMode
-	Parallelism   int
+	Mode          redisConfig.Mode
 }
 
 type TargetAction func(key, value string) error
@@ -418,6 +419,15 @@ func getRedisMode(c *config.Config) RedisMode {
 	return RedisModeSingle
 }
 
+func getRunMode(c *config.Config) redisConfig.Mode {
+	switch strings.ToLower(c.GetRedis().GetMode()) {
+	case redisConfig.ModeParallel:
+		return redisConfig.ModeParallel
+	default:
+		return redisConfig.ModeSerial
+	}
+}
+
 func compose(c *config.Config, builders []TargetBuilder) []Benchmark {
 	redisMode := getRedisMode(c)
 	benchmarks := make([]Benchmark, 0, len(c.GetRedis().GetKeySizes())*len(c.GetRedis().GetValueSizes())*len(builders))
@@ -426,10 +436,8 @@ func compose(c *config.Config, builders []TargetBuilder) []Benchmark {
 		for _, v := range c.GetRedis().GetValueSizes() {
 			val := gen(v)
 			for _, poolSize := range c.GetRedis().GetPoolSizes() {
-				for _, parallelism := range c.GetRedis().GetParallelisms() {
-					for _, builder := range builders {
-						benchmarks = append(benchmarks, Benchmark{Key: key, Val: val, PoolSize: poolSize, TargetBuilder: builder, RedisMode: redisMode, Parallelism: parallelism})
-					}
+				for _, builder := range builders {
+					benchmarks = append(benchmarks, Benchmark{Key: key, Val: val, PoolSize: poolSize, TargetBuilder: builder, RedisMode: redisMode, Mode: getRunMode(c)})
 				}
 			}
 		}
@@ -445,20 +453,39 @@ func runBenchmark(b *testing.B, benchmarks []Benchmark) {
 				continue
 			}
 		}
-		b.Run(fmt.Sprintf("%s:%s:Key(%d):Value(%d):Pool(%d):Parallelism(%d)", bc.TargetBuilder.Name, bc.RedisMode, len(bc.Key), len(bc.Val), bc.PoolSize, bc.Parallelism), func(b *testing.B) {
+		var parallel = 0
+		var modeString string
+		switch bc.Mode {
+		case redisConfig.ModeSerial:
+			modeString = "Serial"
+		case redisConfig.ModeParallel:
+			parallel = runtime.GOMAXPROCS(0) * 8
+			modeString = fmt.Sprintf("Parallel(%d)", parallel)
+		}
+		b.Run(fmt.Sprintf("%s:%s:Key(%d):Value(%d):Pool(%d):%s", bc.TargetBuilder.Name, bc.RedisMode, len(bc.Key), len(bc.Val), bc.PoolSize, modeString), func(b *testing.B) {
 			target, err := bc.TargetBuilder.Make(bc)
 			if err != nil {
 				b.Fatalf("%s setup fail: %v", bc.TargetBuilder.Name, err)
 			}
-			b.SetParallelism(bc.Parallelism)
-			b.ResetTimer()
-			b.RunParallel(func(pb *testing.PB) {
-				for pb.Next() {
-					if err := target.Do(bench.Key, bench.Val); err != nil {
+			if parallel > 0 {
+				b.SetParallelism(parallel)
+				b.ResetTimer()
+				b.RunParallel(func(pb *testing.PB) {
+					for pb.Next() {
+						if err = target.Do(bench.Key, bench.Val); err != nil {
+							b.Errorf("%s error during benchmark: %v", bench.TargetBuilder.Name, err)
+						}
+					}
+				})
+			} else {
+				b.ResetTimer()
+				for i := 0; i < b.N; i++ {
+					if err = target.Do(bench.Key, bench.Val); err != nil {
 						b.Errorf("%s error during benchmark: %v", bench.TargetBuilder.Name, err)
 					}
 				}
-			})
+			}
+
 			b.StopTimer()
 			target.Close()
 		})
