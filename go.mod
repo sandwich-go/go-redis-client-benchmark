@@ -12,8 +12,7 @@ require (
 	github.com/mediocregopher/radix.v2 v0.0.0-20181115013041-b67df6e626f9 // indirect
 	github.com/mediocregopher/radix/v4 v4.1.1
 	github.com/rueian/rueidis v0.0.74
-	github.com/sandwich-go/redisson v1.1.13
-	github.com/sandwich-go/rueidis v0.1.7
+	github.com/sandwich-go/redisson v1.1.14
 	github.com/sandwich-go/xconf v0.3.22
 	github.com/valyala/fastrand v1.1.0
 )
