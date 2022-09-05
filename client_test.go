@@ -70,6 +70,36 @@ type redisGoClusterClientBuilder struct {
 func (r *redisGoClusterClientBuilder) Get() redisGoClient { return r.c }
 func (r *redisGoClusterClientBuilder) Close() error       { r.c.cluster.Close(); return nil }
 
+func flushMasterNodes(nodes string) error {
+	var masterHosts []string
+	ress := strings.Split(nodes, " ")
+	for k, v := range ress {
+		if strings.Contains(v, "@") {
+			if strings.Contains(ress[k+1], "master") {
+				masterHosts = append(masterHosts, strings.Split(v, "@")[0])
+			}
+		}
+	}
+	for _, masterHost := range masterHosts {
+		c, err := redisson.Connect(redisson.NewConf(
+			redisson.WithAddrs(masterHost),
+			redisson.WithCluster(false),
+			redisson.WithDevelopment(false),
+			redisson.WithEnableMonitor(false),
+		))
+		if err != nil {
+			return err
+		}
+		err = c.FlushAll(context.Background()).Err()
+		_ = c.Close()
+		if err != nil {
+
+			return err
+		}
+	}
+	return nil
+}
+
 func newRedissonWithFlushAll(cfg *config.Config, bench Benchmark, resp redisson.RESP) (redisson.Cmdable, error) {
 	c, err := redisson.Connect(redisson.NewConf(
 		redisson.WithAddrs(cfg.GetRedis().GetAddrs()...),
@@ -83,10 +113,23 @@ func newRedissonWithFlushAll(cfg *config.Config, bench Benchmark, resp redisson.
 	if err != nil {
 		return nil, err
 	}
-	err = c.FlushAll(context.Background()).Err()
-	if err != nil {
-		return nil, err
+	if !cfg.GetRedis().GetCluster() || resp != redisson.RESP3 {
+		err = c.FlushAll(context.Background()).Err()
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		var res string
+		res, err = c.ClusterNodes(context.Background()).Result()
+		if err != nil {
+			return nil, err
+		}
+		err = flushMasterNodes(res)
+		if err != nil {
+			return nil, err
+		}
 	}
+
 	return c, nil
 }
 
@@ -194,10 +237,23 @@ func newRueidisWithFlushAll(cfg *config.Config) (rueidiscompat.Cmdable, rueidis.
 	if err != nil {
 		return nil, nil, err
 	}
-	if err = client.Do(context.Background(), client.B().Flushall().Build()).Error(); err != nil {
-		return nil, nil, err
+	adapter := rueidiscompat.NewAdapter(client)
+	if !cfg.GetRedis().GetCluster() {
+		if err = adapter.FlushAll(context.Background()).Err(); err != nil {
+			return nil, nil, err
+		}
+	} else {
+		var res string
+		res, err = adapter.ClusterNodes(context.Background()).Result()
+		if err != nil {
+			return nil, nil, err
+		}
+		err = flushMasterNodes(res)
+		if err != nil {
+			return nil, nil, err
+		}
 	}
-	return rueidiscompat.NewAdapter(client), client, err
+	return adapter, client, err
 }
 
 func newRueidisCacheTargetBuilder(cfg *config.Config, before func(rueidiscompat.Cmdable, Benchmark) error, make func(rueidiscompat.CacheCompat) TargetAction) TargetBuilder {
@@ -377,9 +433,13 @@ func newRedispipeTargetBuilder(cfg *config.Config, before func(redispipe.Sender,
 			if err != nil {
 				return emptyTarget, err
 			}
-			if err = redispipe.AsError(redispipe.Sync{client}.Do("FLUSHALL")); err != nil {
-				return emptyTarget, err
-			}
+			client.EachShard(func(sender redispipe.Sender, err error) bool {
+				if err = redispipe.AsError(redispipe.Sync{sender}.Do("FLUSHALL")); err != nil {
+					return false
+				}
+				return true
+			})
+
 			if before != nil {
 				if err = before(client, benchmark); err != nil {
 					return emptyTarget, err
@@ -431,12 +491,12 @@ func getRunMode(c *config.Config) redisConfig.Mode {
 func compose(c *config.Config, builders []TargetBuilder) []Benchmark {
 	redisMode := getRedisMode(c)
 	benchmarks := make([]Benchmark, 0, len(c.GetRedis().GetKeySizes())*len(c.GetRedis().GetValueSizes())*len(builders))
-	for _, k := range c.GetRedis().GetKeySizes() {
-		key := gen(k)
-		for _, v := range c.GetRedis().GetValueSizes() {
-			val := gen(v)
-			for _, poolSize := range c.GetRedis().GetPoolSizes() {
-				for _, builder := range builders {
+	for _, builder := range builders {
+		for _, k := range c.GetRedis().GetKeySizes() {
+			key := gen(k)
+			for _, v := range c.GetRedis().GetValueSizes() {
+				val := gen(v)
+				for _, poolSize := range c.GetRedis().GetPoolSizes() {
 					benchmarks = append(benchmarks, Benchmark{Key: key, Val: val, PoolSize: poolSize, TargetBuilder: builder, RedisMode: redisMode, Mode: getRunMode(c)})
 				}
 			}
@@ -459,7 +519,7 @@ func runBenchmark(b *testing.B, benchmarks []Benchmark) {
 		case redisConfig.ModeSerial:
 			modeString = "Serial"
 		case redisConfig.ModeParallel:
-			parallel = runtime.GOMAXPROCS(0) * 8
+			parallel = runtime.GOMAXPROCS(0) * 2
 			modeString = fmt.Sprintf("Parallel(%d)", parallel)
 		}
 		b.Run(fmt.Sprintf("%s:%s:Key(%d):Value(%d):Pool(%d):%s", bc.TargetBuilder.Name, bc.RedisMode, len(bc.Key), len(bc.Val), bc.PoolSize, modeString), func(b *testing.B) {
@@ -485,7 +545,6 @@ func runBenchmark(b *testing.B, benchmarks []Benchmark) {
 					}
 				}
 			}
-
 			b.StopTimer()
 			target.Close()
 		})
