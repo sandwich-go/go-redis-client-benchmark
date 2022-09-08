@@ -11,7 +11,7 @@ AWS ElasticCache for Redis，Cache type node `cache.m6g.large`.
 - Single
 - Cluster, 1 Master, 1 slave
 
-Max connection pool size 100 and 1000, `sandwich-go/redisson/RESP3`、`rueian/rueidis` and `joomcode/redispipe` only one connection.    
+Max connection pool size 100 and 1000, `sandwich-go/redisson/RESP3`、`rueian/rueidis` and `joomcode/redispipe` only 1 connection.    
 Length of Key 16.  
 Length of Value 64、256 and 1024.  
 Run benchmark using serial and parallel mode.
