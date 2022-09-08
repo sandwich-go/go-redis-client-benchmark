@@ -17,46 +17,46 @@ Run benchmark using serial and parallel mode.
 ### Benchmarking Result
 #### Single Redis
 ```markdown
-+-----------------------------------------------------------------------------------------------------------+-----------+---------------+-----------+--------------+
-| Single Serial Get                                                                                         | iteration | ns/op         | B/op      | allocs/op    |
-+===========================================================================================================+===========+===============+===========+==============+
-| BenchmarkClientGet/github.com/sandwich-go/redisson/RESP2:Single:Key(16):Value(64):Pool(100):Serial-4      | 4953      | 487019 ns/op  | 276 B/op  | 6 allocs/op  |
-| BenchmarkClientGet/github.com/sandwich-go/redisson/RESP2:Single:Key(16):Value(64):Pool(1000):Serial-4     | 4978      | 488346 ns/op  | 276 B/op  | 6 allocs/op  |
-| BenchmarkClientGet/github.com/sandwich-go/redisson/RESP2:Single:Key(16):Value(256):Pool(100):Serial-4     | 4966      | 485089 ns/op  | 484 B/op  | 6 allocs/op  |
-| BenchmarkClientGet/github.com/sandwich-go/redisson/RESP2:Single:Key(16):Value(256):Pool(1000):Serial-4    | 4916      | 484548 ns/op  | 484 B/op  | 6 allocs/op  |
-| BenchmarkClientGet/github.com/sandwich-go/redisson/RESP2:Single:Key(16):Value(1024):Pool(100):Serial-4    | 4929      | 487335 ns/op  | 1348 B/op | 6 allocs/op  |
-| BenchmarkClientGet/github.com/sandwich-go/redisson/RESP2:Single:Key(16):Value(1024):Pool(1000):Serial-4   | 4933      | 488121 ns/op  | 1348 B/op | 6 allocs/op  |
-| BenchmarkClientGet/github.com/sandwich-go/redisson/RESP3:Single:Key(16):Value(64):Pool(100):Serial-4      | 4958      | 485398 ns/op  | 320 B/op  | 4 allocs/op  |
-| BenchmarkClientGet/github.com/sandwich-go/redisson/RESP3:Single:Key(16):Value(64):Pool(1000):Serial-4     | 4935      | 485190 ns/op  | 320 B/op  | 4 allocs/op  |
-| BenchmarkClientGet/github.com/sandwich-go/redisson/RESP3:Single:Key(16):Value(256):Pool(100):Serial-4     | 4966      | 484629 ns/op  | 512 B/op  | 4 allocs/op  |
-| BenchmarkClientGet/github.com/sandwich-go/redisson/RESP3:Single:Key(16):Value(256):Pool(1000):Serial-4    | 4939      | 488952 ns/op  | 512 B/op  | 4 allocs/op  |
-| BenchmarkClientGet/github.com/sandwich-go/redisson/RESP3:Single:Key(16):Value(1024):Pool(100):Serial-4    | 4954      | 489221 ns/op  | 1280 B/op | 4 allocs/op  |
-| BenchmarkClientGet/github.com/sandwich-go/redisson/RESP3:Single:Key(16):Value(1024):Pool(1000):Serial-4   | 4926      | 491789 ns/op  | 1280 B/op | 4 allocs/op  |
-| BenchmarkClientGet/github.com/rueian/rueidis/rueidiscompat:Single:Key(16):Value(64):Pool(100):Serial-4    | 4987      | 483422 ns/op  | 256 B/op  | 4 allocs/op  |
-| BenchmarkClientGet/github.com/rueian/rueidis/rueidiscompat:Single:Key(16):Value(64):Pool(1000):Serial-4   | 4968      | 487068 ns/op  | 256 B/op  | 4 allocs/op  |
-| BenchmarkClientGet/github.com/rueian/rueidis/rueidiscompat:Single:Key(16):Value(256):Pool(100):Serial-4   | 4986      | 486305 ns/op  | 448 B/op  | 4 allocs/op  |
-| BenchmarkClientGet/github.com/rueian/rueidis/rueidiscompat:Single:Key(16):Value(256):Pool(1000):Serial-4  | 4924      | 487030 ns/op  | 448 B/op  | 4 allocs/op  |
-| BenchmarkClientGet/github.com/rueian/rueidis/rueidiscompat:Single:Key(16):Value(1024):Pool(100):Serial-4  | 4922      | 487140 ns/op  | 1216 B/op | 4 allocs/op  |
-| BenchmarkClientGet/github.com/rueian/rueidis/rueidiscompat:Single:Key(16):Value(1024):Pool(1000):Serial-4 | 4966      | 487747 ns/op  | 1216 B/op | 4 allocs/op  |
-| BenchmarkClientGet/github.com/go-redis/redis/v8:Single:Key(16):Value(64):Pool(100):Serial-4               | 4953      | 488424 ns/op  | 276 B/op  | 6 allocs/op  |
-| BenchmarkClientGet/github.com/go-redis/redis/v8:Single:Key(16):Value(64):Pool(1000):Serial-4              | 4971      | 495383 ns/op  | 276 B/op  | 6 allocs/op  |
-| BenchmarkClientGet/github.com/go-redis/redis/v8:Single:Key(16):Value(256):Pool(100):Serial-4              | 4981      | 486368 ns/op  | 484 B/op  | 6 allocs/op  |
-| BenchmarkClientGet/github.com/go-redis/redis/v8:Single:Key(16):Value(256):Pool(1000):Serial-4             | 4936      | 484809 ns/op  | 484 B/op  | 6 allocs/op  |
-| BenchmarkClientGet/github.com/go-redis/redis/v8:Single:Key(16):Value(1024):Pool(100):Serial-4             | 4887      | 487234 ns/op  | 1348 B/op | 6 allocs/op  |
-| BenchmarkClientGet/github.com/go-redis/redis/v8:Single:Key(16):Value(1024):Pool(1000):Serial-4            | 4928      | 496201 ns/op  | 1348 B/op | 6 allocs/op  |
-| BenchmarkClientGet/github.com/mediocregopher/radix/v4:Single:Key(16):Value(64):Pool(100):Serial-4         | 4537      | 506352 ns/op  | 876 B/op  | 4 allocs/op  |
-| BenchmarkClientGet/github.com/mediocregopher/radix/v4:Single:Key(16):Value(64):Pool(1000):Serial-4        | 4512      | 533221 ns/op  | 8989 B/op | 36 allocs/op |
-| BenchmarkClientGet/github.com/mediocregopher/radix/v4:Single:Key(16):Value(256):Pool(100):Serial-4        | 4537      | 510415 ns/op  | 869 B/op  | 4 allocs/op  |
-| BenchmarkClientGet/github.com/mediocregopher/radix/v4:Single:Key(16):Value(256):Pool(1000):Serial-4       | 4526      | 532493 ns/op  | 8787 B/op | 35 allocs/op |
-| BenchmarkClientGet/github.com/mediocregopher/radix/v4:Single:Key(16):Value(1024):Pool(100):Serial-4       | 4369      | 516728 ns/op  | 903 B/op  | 4 allocs/op  |
-| BenchmarkClientGet/github.com/mediocregopher/radix/v4:Single:Key(16):Value(1024):Pool(1000):Serial-4      | 4312      | 537812 ns/op  | 9222 B/op | 37 allocs/op |
-| BenchmarkClientGet/github.com/joomcode/redispipe:Single:Key(16):Value(64):Pool(100):Serial-4              | 1546      | 1557321 ns/op | 168 B/op  | 5 allocs/op  |
-| BenchmarkClientGet/github.com/joomcode/redispipe:Single:Key(16):Value(64):Pool(1000):Serial-4             | 1540      | 1565308 ns/op | 168 B/op  | 5 allocs/op  |
-| BenchmarkClientGet/github.com/joomcode/redispipe:Single:Key(16):Value(256):Pool(100):Serial-4             | 1540      | 1573693 ns/op | 376 B/op  | 5 allocs/op  |
-| BenchmarkClientGet/github.com/joomcode/redispipe:Single:Key(16):Value(256):Pool(1000):Serial-4            | 1526      | 1555364 ns/op | 376 B/op  | 5 allocs/op  |
-| BenchmarkClientGet/github.com/joomcode/redispipe:Single:Key(16):Value(1024):Pool(100):Serial-4            | 1534      | 1561348 ns/op | 1240 B/op | 5 allocs/op  |
-| BenchmarkClientGet/github.com/joomcode/redispipe:Single:Key(16):Value(1024):Pool(1000):Serial-4           | 1532      | 1561439 ns/op | 1240 B/op | 5 allocs/op  |
-+-----------------------------------------------------------------------------------------------------------+-----------+---------------+-----------+--------------+
++----------------------------------------------------------------------+-----------+---------+------+--------------+
+| Single Serial Get                                                    | iteration | ns/op   | B/op | allocs/op    |
++======================================================================+===========+=========+======+==============+
+| sandwich-go/redisson/RESP2:Key(16):Value(64):Pool(100):Serial-4      | 4953      | 487019  | 276  |            6 |
+| sandwich-go/redisson/RESP2:Key(16):Value(64):Pool(1000):Serial-4     | 4978      | 488346  | 276  |            6 |
+| sandwich-go/redisson/RESP2:Key(16):Value(256):Pool(100):Serial-4     | 4966      | 485089  | 484  |            6 |
+| sandwich-go/redisson/RESP2:Key(16):Value(256):Pool(1000):Serial-4    | 4916      | 484548  | 484  |            6 |
+| sandwich-go/redisson/RESP2:Key(16):Value(1024):Pool(100):Serial-4    | 4929      | 487335  | 1348 |            6 |
+| sandwich-go/redisson/RESP2:Key(16):Value(1024):Pool(1000):Serial-4   | 4933      | 488121  | 1348 |            6 |
+| sandwich-go/redisson/RESP3:Key(16):Value(64):Pool(100):Serial-4      | 4958      | 485398  | 320  |            4 |
+| sandwich-go/redisson/RESP3:Key(16):Value(64):Pool(1000):Serial-4     | 4935      | 485190  | 320  |            4 |
+| sandwich-go/redisson/RESP3:Key(16):Value(256):Pool(100):Serial-4     | 4966      | 484629  | 512  |            4 |
+| sandwich-go/redisson/RESP3:Key(16):Value(256):Pool(1000):Serial-4    | 4939      | 488952  | 512  |            4 |
+| sandwich-go/redisson/RESP3:Key(16):Value(1024):Pool(100):Serial-4    | 4954      | 489221  | 1280 |            4 |
+| sandwich-go/redisson/RESP3:Key(16):Value(1024):Pool(1000):Serial-4   | 4926      | 491789  | 1280 |            4 |
+| rueian/rueidis/rueidiscompat:Key(16):Value(64):Pool(100):Serial-4    | 4987      | 483422  | 256  |            4 |
+| rueian/rueidis/rueidiscompat:Key(16):Value(64):Pool(1000):Serial-4   | 4968      | 487068  | 256  |            4 |
+| rueian/rueidis/rueidiscompat:Key(16):Value(256):Pool(100):Serial-4   | 4986      | 486305  | 448  |            4 |
+| rueian/rueidis/rueidiscompat:Key(16):Value(256):Pool(1000):Serial-4  | 4924      | 487030  | 448  |            4 |
+| rueian/rueidis/rueidiscompat:Key(16):Value(1024):Pool(100):Serial-4  | 4922      | 487140  | 1216 |            4 |
+| rueian/rueidis/rueidiscompat:Key(16):Value(1024):Pool(1000):Serial-4 | 4966      | 487747  | 1216 |            4 |
+| go-redis/redis/v8:Key(16):Value(64):Pool(100):Serial-4               | 4953      | 488424  | 276  |            6 |
+| go-redis/redis/v8:Key(16):Value(64):Pool(1000):Serial-4              | 4971      | 495383  | 276  |            6 |
+| go-redis/redis/v8:Key(16):Value(256):Pool(100):Serial-4              | 4981      | 486368  | 484  |            6 |
+| go-redis/redis/v8:Key(16):Value(256):Pool(1000):Serial-4             | 4936      | 484809  | 484  |            6 |
+| go-redis/redis/v8:Key(16):Value(1024):Pool(100):Serial-4             | 4887      | 487234  | 1348 |            6 |
+| go-redis/redis/v8:Key(16):Value(1024):Pool(1000):Serial-4            | 4928      | 496201  | 1348 |            6 |
+| mediocregopher/radix/v4:Key(16):Value(64):Pool(100):Serial-4         | 4537      | 506352  | 876  |            4 |
+| mediocregopher/radix/v4:Key(16):Value(64):Pool(1000):Serial-4        | 4512      | 533221  | 8989 |            3 |
+| mediocregopher/radix/v4:Key(16):Value(256):Pool(100):Serial-4        | 4537      | 510415  | 869  |            4 |
+| mediocregopher/radix/v4:Key(16):Value(256):Pool(1000):Serial-4       | 4526      | 532493  | 8787 |            3 |
+| mediocregopher/radix/v4:Key(16):Value(1024):Pool(100):Serial-4       | 4369      | 516728  | 903  |            4 |
+| mediocregopher/radix/v4:Key(16):Value(1024):Pool(1000):Serial-4      | 4312      | 537812  | 9222 |            3 |
+| joomcode/redispipe:Key(16):Value(64):Pool(100):Serial-4              | 1546      | 1557321 | 168  |            5 |
+| joomcode/redispipe:Key(16):Value(64):Pool(1000):Serial-4             | 1540      | 1565308 | 168  |            5 |
+| joomcode/redispipe:Key(16):Value(256):Pool(100):Serial-4             | 1540      | 1573693 | 376  |            5 |
+| joomcode/redispipe:Key(16):Value(256):Pool(1000):Serial-4            | 1526      | 1555364 | 376  |            5 |
+| joomcode/redispipe:Key(16):Value(1024):Pool(100):Serial-4            | 1534      | 1561348 | 1240 |            5 |
+| joomcode/redispipe:Key(16):Value(1024):Pool(1000):Serial-4           | 1532      | 1561439 | 1240 |            5 |
++----------------------------------------------------------------------+-----------+---------+------+--------------+
 ```
 
 ```markdown
