@@ -196,6 +196,8 @@ Run benchmark using serial and parallel mode.
 +---------------------------------------------------+-----------+----------+-------+-----------+  
 ```
 
+![BenchmarkSingleClientExpireSerial](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkSingleClientExpireSerial.png)
+
 ```markdown
 +---------------------------------------------------+-----------+----------+-------+-----------+
 | Single Serial TTL                                 | iteration | ns/op    | B/op  | allocs/op |
@@ -230,6 +232,8 @@ Run benchmark using serial and parallel mode.
 +---------------------------------------------------+-----------+----------+-------+-----------+  
 ```
 
+![BenchmarkSingleClientTTLSerial](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkSingleClientTTLSerial.png)
+
 ```markdown
 +---------------------------------------------------+-----------+----------+-------+-----------+
 | Single Serial HSet                                | iteration | ns/op    | B/op  | allocs/op |
@@ -263,6 +267,7 @@ Run benchmark using serial and parallel mode.
 | joomcode/redispipe:Val(1024):Pool(100)            | 1533      | 1560643  | 129   |       5   |
 +---------------------------------------------------+-----------+----------+-------+-----------+  
 ```
+![BenchmarkSingleClientHSetSerial](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkSingleClientHSetSerial.png)
 
 ```markdown
 +---------------------------------------------------+-----------+----------+-------+-----------+
@@ -298,6 +303,8 @@ Run benchmark using serial and parallel mode.
 +---------------------------------------------------+-----------+----------+-------+-----------+  
 ```
 
+![BenchmarkSingleClientHGetSerial](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkSingleClientHGetSerial.png)
+
 ```markdown
 +---------------------------------------------------+-----------+----------+-------+-----------+
 | Single Serial HDel                                | iteration | ns/op    | B/op  | allocs/op |
@@ -331,6 +338,8 @@ Run benchmark using serial and parallel mode.
 | joomcode/redispipe:Val(1024):Pool(100)            | 1537      | 1560043  | 96    |       4   |
 +---------------------------------------------------+-----------+----------+-------+-----------+  
 ```
+
+![BenchmarkSingleClientHDelSerial](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkSingleClientHDelSerial.png)
 
 ```markdown
 +---------------------------------------------------+-----------+-------+-------+-----------+
@@ -366,6 +375,8 @@ Run benchmark using serial and parallel mode.
 +---------------------------------------------------+-----------+-------+-------+-----------+  
 ```
 
+![BenchmarkSingleClientGetParallel](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkSingleClientGetParallel.png)
+
 ```markdown
 +---------------------------------------------------+-----------+-------+-------+-----------+
 | Single Parallel(128) Set                          | iteration | ns/op | B/op  | allocs/op |
@@ -399,6 +410,8 @@ Run benchmark using serial and parallel mode.
 | joomcode/redispipe:Val(1024):Pool(100)            | 1208988   | 2020  | 134   |        6  |
 +---------------------------------------------------+-----------+-------+-------+-----------+  
 ```
+
+![BenchmarkSingleClientSetParallel](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkSingleClientSetParallel.png)
 
 ```markdown
 +---------------------------------------------------+-----------+-------+-------+-----------+
@@ -434,6 +447,8 @@ Run benchmark using serial and parallel mode.
 +---------------------------------------------------+-----------+-------+-------+-----------+  
 ```
 
+![BenchmarkSingleClientDelParallel](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkSingleClientDelParallel.png)
+
 ```markdown
 +---------------------------------------------------+-----------+-------+-------+-----------+
 | Single Parallel(128) Exists                       | iteration | ns/op | B/op  | allocs/op |
@@ -467,6 +482,8 @@ Run benchmark using serial and parallel mode.
 | joomcode/redispipe:Val(1024):Pool(100)            | 1000000   | 2187  | 65    |        3  |
 +---------------------------------------------------+-----------+-------+-------+-----------+  
 ```
+
+![BenchmarkSingleClientExistsParallel](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkSingleClientExistsParallel.png)                           
 
 ```markdown
 +---------------------------------------------------+-----------+-------+-------+-----------+
@@ -502,6 +519,8 @@ Run benchmark using serial and parallel mode.
 +---------------------------------------------------+-----------+-------+-------+-----------+  
 ```
 
+![BenchmarkSingleClientExpireParallel](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkSingleClientExpireParallel.png)
+
 ```markdown
 +---------------------------------------------------+-----------+-------+-------+-----------+
 | Single Parallel(128) TTL                          | iteration | ns/op | B/op  | allocs/op |
@@ -535,6 +554,8 @@ Run benchmark using serial and parallel mode.
 | joomcode/redispipe:Val(1024):Pool(100)            | 1051593   | 2263  | 73    |        4  |
 +---------------------------------------------------+-----------+-------+-------+-----------+   
 ```
+
+![BenchmarkSingleClientTTLParallel](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkSingleClientTTLParallel.png)
 
 ```markdown
 +---------------------------------------------------+-----------+-------+-------+-----------+
@@ -570,6 +591,8 @@ Run benchmark using serial and parallel mode.
 +---------------------------------------------------+-----------+-------+-------+-----------+  
 ```
 
+![BenchmarkSingleClientHSetParallel](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkSingleClientHSetParallel.png)
+
 ```markdown
 +---------------------------------------------------+-----------+-------+-------+-----------+
 | Single Parallel(128) HGet                         | iteration | ns/op | B/op  | allocs/op |
@@ -604,6 +627,8 @@ Run benchmark using serial and parallel mode.
 +---------------------------------------------------+-----------+-------+-------+-----------+  
 ```
 
+![BenchmarkSingleClientHGetParallel](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkSingleClientHGetParallel.png)
+
 ```markdown
 +---------------------------------------------------+-----------+-------+-------+-----------+
 | Single Parallel(128) HDel                         | iteration | ns/op | B/op  | allocs/op |
@@ -637,6 +662,8 @@ Run benchmark using serial and parallel mode.
 | joomcode/redispipe:Val(1024):Pool(100)            | 1000000   | 2075  | 97    |        4  |
 +---------------------------------------------------+-----------+-------+-------+-----------+  
 ```
+
+![BenchmarkSingleClientHDelParallel](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkSingleClientHDelParallel.png)
 
 #### Cluster Redis
 ```markdown
@@ -673,6 +700,8 @@ Run benchmark using serial and parallel mode.
 +---------------------------------------------------+-----------+----------+-------+-----------+  
 ```
 
+![BenchmarkClusterClientGetSerial](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkClusterClientGetSerial.png)
+
 ```markdown
 +---------------------------------------------------+-----------+----------+-------+-----------+
 | Cluster Serial Set                                | iteration | ns/op    | B/op  | allocs/op |
@@ -706,6 +735,8 @@ Run benchmark using serial and parallel mode.
 | joomcode/redispipe:Val(1024):Pool(100)            | 1530      | 1567822  | 117   |        6  |
 +---------------------------------------------------+-----------+----------+-------+-----------+  
 ```
+
+![BenchmarkClusterClientSetSerial](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkClusterClientSetSerial.png)
 
 ```markdown
 +---------------------------------------------------+-----------+----------+-------+-----------+
@@ -741,6 +772,8 @@ Run benchmark using serial and parallel mode.
 +---------------------------------------------------+-----------+----------+-------+-----------+  
 ```
 
+![BenchmarkClusterClientDelSerial](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkClusterClientDelSerial.png)
+
 ```markdown
 +---------------------------------------------------+-----------+----------+-------+-----------+
 | Cluster Serial Exists                             | iteration | ns/op    | B/op  | allocs/op |
@@ -774,6 +807,8 @@ Run benchmark using serial and parallel mode.
 | joomcode/redispipe:Val(1024):Pool(100)            | 1543      | 1559059  | 65    |        3  |
 +---------------------------------------------------+-----------+----------+-------+-----------+  
 ```
+
+![BenchmarkClusterClientExistsSerial](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkClusterClientExistsSerial.png)
 
 ```markdown
 +---------------------------------------------------+-----------+----------+-------+-----------+
@@ -809,6 +844,8 @@ Run benchmark using serial and parallel mode.
 +---------------------------------------------------+-----------+----------+-------+-----------+  
 ```
 
+![BenchmarkClusterClientExpireSerial](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkClusterClientExpireSerial.png)
+
 ```markdown
 +---------------------------------------------------+-----------+----------+-------+-----------+
 | Cluster Serial TTL                                | iteration | ns/op    | B/op  | allocs/op |
@@ -842,6 +879,8 @@ Run benchmark using serial and parallel mode.
 | joomcode/redispipe:Val(1024):Pool(100)            | 1537      | 1556139  | 73    |        4  |
 +---------------------------------------------------+-----------+----------+-------+-----------+  
 ```
+
+![BenchmarkClusterClientTTLSerial](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkClusterClientTTLSerial.png)
 
 ```markdown
 +---------------------------------------------------+-----------+----------+-------+-----------+
@@ -877,6 +916,8 @@ Run benchmark using serial and parallel mode.
 +---------------------------------------------------+-----------+----------+-------+-----------+  
 ```
 
+![BenchmarkClusterClientHSetSerial](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkClusterClientHSetSerial.png)
+
 ```markdown
 +---------------------------------------------------+-----------+----------+-------+-----------+
 | Cluster Serial HGet                               | iteration | ns/op    | B/op  | allocs/op |
@@ -910,6 +951,8 @@ Run benchmark using serial and parallel mode.
 | joomcode/redispipe:Val(1024):Pool(100)            | 1534      | 1567017  | 1274  |        6  |
 +---------------------------------------------------+-----------+----------+-------+-----------+  
 ```
+
+![BenchmarkClusterClientHGetSerial](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkClusterClientHGetSerial.png)
 
 ```markdown
 +---------------------------------------------------+-----------+----------+-------+-----------+
@@ -945,6 +988,8 @@ Run benchmark using serial and parallel mode.
 +---------------------------------------------------+-----------+----------+-------+-----------+  
 ```
 
+![BenchmarkClusterClientHDelSerial](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkClusterClientHDelSerial.png)                                                          
+
 ```markdown
 +---------------------------------------------------+-----------+-------+-------+-----------+ 
 | Cluster Parallel(128) Get                         | iteration | ns/op | B/op  | allocs/op | 
@@ -978,6 +1023,8 @@ Run benchmark using serial and parallel mode.
 | joomcode/redispipe:Val(1024):Pool(100)            | 800530    | 2548  | 1246  |        5  |
 +---------------------------------------------------+-----------+-------+-------+-----------+ 
 ```
+
+![BenchmarkClusterClientGetParallel](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkClusterClientGetParallel.png)
 
 ```markdown
 +---------------------------------------------------+-----------+-------+-------+-----------+ 
@@ -1013,6 +1060,8 @@ Run benchmark using serial and parallel mode.
 +---------------------------------------------------+-----------+-------+-------+-----------+  
 ```
 
+![BenchmarkClusterClientSetParallel](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkClusterClientSetParallel.png)
+
 ```markdown
 +---------------------------------------------------+-----------+-------+-------+-----------+ 
 | Cluster Parallel(128) Del                         | iteration | ns/op | B/op  | allocs/op | 
@@ -1046,6 +1095,8 @@ Run benchmark using serial and parallel mode.
 | joomcode/redispipe:Val(1024):Pool(100)            | 1180410   | 2071  | 65    |        3  |
 +---------------------------------------------------+-----------+-------+-------+-----------+ 
 ```
+
+![BenchmarkClusterClientDelParallel](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkClusterClientDelParallel.png)
 
 ```markdown
 +---------------------------------------------------+-----------+-------+-------+-----------+ 
@@ -1081,6 +1132,8 @@ Run benchmark using serial and parallel mode.
 +---------------------------------------------------+-----------+-------+-------+-----------+ 
 ```
 
+![BenchmarkClusterClientExistsParallel](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkClusterClientExistsParallel.png)
+
 ```markdown
 +---------------------------------------------------+-----------+-------+-------+-----------+ 
 | Cluster Parallel(128) Expire                      | iteration | ns/op | B/op  | allocs/op | 
@@ -1114,6 +1167,8 @@ Run benchmark using serial and parallel mode.
 | joomcode/redispipe:Val(1024):Pool(100)            | 737113    | 2878  | 82    |        3  |
 +---------------------------------------------------+-----------+-------+-------+-----------+ 
 ```
+
+![BenchmarkClusterClientExpireParallel](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkClusterClientExpireParallel.png)
 
 ```markdown
 +---------------------------------------------------+-----------+-------+-------+-----------+ 
@@ -1149,6 +1204,8 @@ Run benchmark using serial and parallel mode.
 +---------------------------------------------------+-----------+-------+-------+-----------+ 
 ```
 
+![BenchmarkClusterClientTTLParallel](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkClusterClientTTLParallel.png)
+
 ```markdown
 +---------------------------------------------------+-----------+-------+-------+-----------+ 
 | Cluster Parallel(128) HSet                        | iteration | ns/op | B/op  | allocs/op | 
@@ -1182,6 +1239,8 @@ Run benchmark using serial and parallel mode.
 | joomcode/redispipe:Val(1024):Pool(100)            | 637536    | 3487  | 152   |        5  |
 +---------------------------------------------------+-----------+-------+-------+-----------+ 
 ```
+
+![BenchmarkClusterClientHSetParallel](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkClusterClientHSetParallel.png)
 
 ```markdown
 +---------------------------------------------------+-----------+-------+-------+-----------+ 
@@ -1217,6 +1276,8 @@ Run benchmark using serial and parallel mode.
 +---------------------------------------------------+-----------+-------+-------+-----------+ 
 ```
 
+![BenchmarkClusterClientHGetParallel](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkClusterClientHGetParallel.png)  
+
 ```markdown
 +---------------------------------------------------+-----------+-------+-------+-----------+ 
 | Cluster Parallel(128) HDel                        | iteration | ns/op | B/op  | allocs/op | 
@@ -1250,3 +1311,5 @@ Run benchmark using serial and parallel mode.
 | joomcode/redispipe:Val(1024):Pool(100)            | 1000000   | 2132  | 97    |        4  |
 +---------------------------------------------------+-----------+-------+-------+-----------+ 
 ```
+     
+![BenchmarkClusterClientHDelParallel](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkClusterClientHDelParallel.png)
