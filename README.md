@@ -160,6 +160,8 @@ Run benchmark using serial and parallel mode.
 +---------------------------------------------------+-----------+----------+-------+-----------+  
 ```
 
+![BenchmarkSingleClientExistsSerial](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkSingleClientExistsSerial.png)
+
 ```markdown
 +---------------------------------------------------+-----------+----------+-------+-----------+
 | Single Serial Expire                              | iteration | ns/op    | B/op  | allocs/op |
