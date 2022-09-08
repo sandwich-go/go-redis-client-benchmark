@@ -708,7 +708,7 @@ Run benchmark using serial and parallel mode.
 
 ```markdown
 +---------------------------------------------------+-----------+-------+-------+-----------+
-| Single Parallel(128) HGet                       	| iteration | ns/op | B/op  | allocs/op |
+| Single Parallel(128) HGet                         | iteration | ns/op | B/op  | allocs/op |
 +===================================================+===========+=======+=======+===========+
 | sandwich-go/redisson/RESP2:Val(64):Pool(100)      | 354025    | 6300  | 311   |        7  |
 | sandwich-go/redisson/RESP2:Val(64):Pool(1000)     | 463798    | 5210  | 320   |        7  |
@@ -751,7 +751,7 @@ Run benchmark using serial and parallel mode.
 
 ```markdown
 +---------------------------------------------------+-----------+-------+-------+-----------+
-| Single Parallel(128) HDel                       	| iteration | ns/op | B/op  | allocs/op |
+| Single Parallel(128) HDel                         | iteration | ns/op | B/op  | allocs/op |
 +===================================================+===========+=======+=======+===========+
 | sandwich-go/redisson/RESP2:Val(64):Pool(100)      | 358890    | 6126  | 231   |        7  |
 | sandwich-go/redisson/RESP2:Val(64):Pool(1000)     | 520810    | 4607  | 238   |        7  |
