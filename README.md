@@ -29,17 +29,11 @@ Run benchmark using serial and parallel mode.
 | sandwich-go/redisson/RESP2:Val(1024):Pool(100)    | 4929      | 487335   | 1348  |       6   |
 | sandwich-go/redisson/RESP2:Val(1024):Pool(1000)   | 4933      | 488121   | 1348  |       6   |
 | sandwich-go/redisson/RESP3:Val(64):Pool(100)      | 4958      | 485398   | 320   |       4   |
-| sandwich-go/redisson/RESP3:Val(64):Pool(1000)     | 4935      | 485190   | 320   |       4   |
 | sandwich-go/redisson/RESP3:Val(256):Pool(100)     | 4966      | 484629   | 512   |       4   |
-| sandwich-go/redisson/RESP3:Val(256):Pool(1000)    | 4939      | 488952   | 512   |       4   |
 | sandwich-go/redisson/RESP3:Val(1024):Pool(100)    | 4954      | 489221   | 1280  |       4   |
-| sandwich-go/redisson/RESP3:Val(1024):Pool(1000)   | 4926      | 491789   | 1280  |       4   |
 | rueian/rueidis/rueidiscompat:Val(64):Pool(100)    | 4987      | 483422   | 256   |       4   |
-| rueian/rueidis/rueidiscompat:Val(64):Pool(1000)   | 4968      | 487068   | 256   |       4   |
 | rueian/rueidis/rueidiscompat:Val(256):Pool(100)   | 4986      | 486305   | 448   |       4   |
-| rueian/rueidis/rueidiscompat:Val(256):Pool(1000)  | 4924      | 487030   | 448   |       4   |
 | rueian/rueidis/rueidiscompat:Val(1024):Pool(100)  | 4922      | 487140   | 1216  |       4   |
-| rueian/rueidis/rueidiscompat:Val(1024):Pool(1000) | 4966      | 487747   | 1216  |       4   |
 | go-redis/redis/v8:Val(64):Pool(100)               | 4953      | 488424   | 276   |       6   |
 | go-redis/redis/v8:Val(64):Pool(1000)              | 4971      | 495383   | 276   |       6   |
 | go-redis/redis/v8:Val(256):Pool(100)              | 4981      | 486368   | 484   |       6   |
@@ -53,11 +47,8 @@ Run benchmark using serial and parallel mode.
 | mediocregopher/radix/v4:Val(1024):Pool(100)       | 4369      | 516728   | 903   |       4   |
 | mediocregopher/radix/v4:Val(1024):Pool(1000)      | 4312      | 537812   | 9222  |       37  |
 | joomcode/redispipe:Val(64):Pool(100)              | 1546      | 1557321  | 168   |       5   |
-| joomcode/redispipe:Val(64):Pool(1000)             | 1540      | 1565308  | 168   |       5   |
 | joomcode/redispipe:Val(256):Pool(100)             | 1540      | 1573693  | 376   |       5   |
-| joomcode/redispipe:Val(256):Pool(1000)            | 1526      | 1555364  | 376   |       5   |
 | joomcode/redispipe:Val(1024):Pool(100)            | 1534      | 1561348  | 1240  |       5   |
-| joomcode/redispipe:Val(1024):Pool(1000)           | 1532      | 1561439  | 1240  |       5   |
 +---------------------------------------------------+-----------+----------+-------+-----------+ 
 ```
 
