@@ -61,7 +61,7 @@ Run benchmark using serial and parallel mode.
 +---------------------------------------------------+-----------+----------+-------+-----------+ 
 ```
 
-![BenchmarkSingleClientGetSerial](https://github.com/sandwich-go/go-redis-client-benchmark/BenchmarkSingleClientGetSerial.png)
+![BenchmarkSingleClientGetSerial](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkSingleClientGetSerial.png)
 
 ```markdown
 +---------------------------------------------------+-----------+----------+-------+-----------+
