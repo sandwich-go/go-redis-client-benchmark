@@ -795,7 +795,7 @@ Run benchmark using serial and parallel mode.
 #### Cluster Redis
 ```markdown
 +---------------------------------------------------+-----------+----------+-------+-----------+
-| Cluster Serial Get                       		    | iteration | ns/op    | B/op  | allocs/op |
+| Cluster Serial Get                                | iteration | ns/op    | B/op  | allocs/op |
 +===================================================+===========+==========+=======+===========+
 | sandwich-go/redisson/RESP2:Val(64):Pool(100)      | 4890      | 487417   | 276   |        6  |
 | sandwich-go/redisson/RESP2:Val(64):Pool(1000)     | 4915      | 488523   | 276   |        6  |
@@ -838,7 +838,7 @@ Run benchmark using serial and parallel mode.
 
 ```markdown
 +---------------------------------------------------+-----------+----------+-------+-----------+
-| Cluster Serial Set                       		    | iteration | ns/op    | B/op  | allocs/op |
+| Cluster Serial Set                                | iteration | ns/op    | B/op  | allocs/op |
 +===================================================+===========+==========+=======+===========+
 | sandwich-go/redisson/RESP2:Val(64):Pool(100)      | 4906      | 493421   | 264   |        7  |
 | sandwich-go/redisson/RESP2:Val(64):Pool(1000)     | 4958      | 489022   | 264   |        7  |
@@ -881,7 +881,7 @@ Run benchmark using serial and parallel mode.
 
 ```markdown
 +---------------------------------------------------+-----------+----------+-------+-----------+
-| Cluster Serial Del                       		    | iteration | ns/op    | B/op  | allocs/op |
+| Cluster Serial Del                                | iteration | ns/op    | B/op  | allocs/op |
 +===================================================+===========+==========+=======+===========+
 | sandwich-go/redisson/RESP2:Val(64):Pool(100)      | 4954      | 482505   | 228   |        7  |
 | sandwich-go/redisson/RESP2:Val(64):Pool(1000)     | 4909      | 490404   | 228   |        7  |
@@ -924,7 +924,7 @@ Run benchmark using serial and parallel mode.
 
 ```markdown
 +---------------------------------------------------+-----------+----------+-------+-----------+
-| Cluster Serial Exists                       		| iteration | ns/op    | B/op  | allocs/op |
+| Cluster Serial Exists                             | iteration | ns/op    | B/op  | allocs/op |
 +===================================================+===========+==========+=======+===========+
 | sandwich-go/redisson/RESP2:Val(64):Pool(100)      | 4948      | 486207   | 196   |        6  |
 | sandwich-go/redisson/RESP2:Val(64):Pool(1000)     | 4945      | 483354   | 196   |        6  |
@@ -967,7 +967,7 @@ Run benchmark using serial and parallel mode.
 
 ```markdown
 +---------------------------------------------------+-----------+----------+-------+-----------+
-| Cluster Serial Expire                       		| iteration | ns/op    | B/op  | allocs/op |
+| Cluster Serial Expire                             | iteration | ns/op    | B/op  | allocs/op |
 +===================================================+===========+==========+=======+===========+
 | sandwich-go/redisson/RESP2:Val(64):Pool(100)      | 4939      | 490287   | 212   |        5  |
 | sandwich-go/redisson/RESP2:Val(64):Pool(1000)     | 4898      | 490532   | 212   |        5  |
@@ -1010,7 +1010,7 @@ Run benchmark using serial and parallel mode.
 
 ```markdown
 +---------------------------------------------------+-----------+----------+-------+-----------+
-| Cluster Serial TTL                       			| iteration | ns/op    | B/op  | allocs/op |
+| Cluster Serial TTL                                | iteration | ns/op    | B/op  | allocs/op |
 +===================================================+===========+==========+=======+===========+
 | sandwich-go/redisson/RESP2:Val(64):Pool(100)      | 4986      | 485173   | 196   |        5  |
 | sandwich-go/redisson/RESP2:Val(64):Pool(1000)     | 4983      | 487435   | 196   |        5  |
@@ -1053,7 +1053,7 @@ Run benchmark using serial and parallel mode.
 
 ```markdown
 +---------------------------------------------------+-----------+----------+-------+-----------+
-| Cluster Serial HSet                       		| iteration | ns/op    | B/op  | allocs/op |
+| Cluster Serial HSet                               | iteration | ns/op    | B/op  | allocs/op |
 +===================================================+===========+==========+=======+===========+
 | sandwich-go/redisson/RESP2:Val(64):Pool(100)      | 4882      | 490112   | 276   |        8  |
 | sandwich-go/redisson/RESP2:Val(64):Pool(1000)     | 4894      | 492661   | 276   |        8  |
@@ -1096,7 +1096,7 @@ Run benchmark using serial and parallel mode.
 
 ```markdown
 +---------------------------------------------------+-----------+----------+-------+-----------+
-| Cluster Serial HGet                       		| iteration | ns/op    | B/op  | allocs/op |
+| Cluster Serial HGet                               | iteration | ns/op    | B/op  | allocs/op |
 +===================================================+===========+==========+=======+===========+
 | sandwich-go/redisson/RESP2:Val(64):Pool(100)      | 4922      | 486146   | 308   |        7  |
 | sandwich-go/redisson/RESP2:Val(64):Pool(1000)     | 4922      | 488823   | 308   |        7  |
@@ -1139,7 +1139,7 @@ Run benchmark using serial and parallel mode.
 
 ```markdown
 +---------------------------------------------------+-----------+----------+-------+-----------+
-| Cluster Serial HDel                       		| iteration | ns/op    | B/op  | allocs/op |
+| Cluster Serial HDel                	            | iteration | ns/op    | B/op  | allocs/op |
 +===================================================+===========+==========+=======+===========+
 | sandwich-go/redisson/RESP2:Val(64):Pool(100)      | 4929      | 487506   | 228   |        7  |
 | sandwich-go/redisson/RESP2:Val(64):Pool(1000)     | 4665      | 486410   | 228   |        7  |
