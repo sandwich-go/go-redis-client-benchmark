@@ -622,7 +622,7 @@ Run benchmark using serial and parallel mode.
 
 ```markdown
 +---------------------------------------------------+-----------+-------+-------+-----------+
-| Single Parallel(128) TTL                       	| iteration | ns/op | B/op  | allocs/op |
+| Single Parallel(128) TTL                          | iteration | ns/op | B/op  | allocs/op |
 +===================================================+===========+=======+=======+===========+
 | sandwich-go/redisson/RESP2:Val(64):Pool(100)      | 354982    | 6075  | 199   |        5  |
 | sandwich-go/redisson/RESP2:Val(64):Pool(1000)     | 503134    | 4750  | 206   |        5  |
