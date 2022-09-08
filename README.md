@@ -65,17 +65,11 @@ Run benchmark using serial and parallel mode.
 | sandwich-go/redisson/RESP2:Val(1024):Pool(100)    | 4926      | 488972   | 264   |       7   |
 | sandwich-go/redisson/RESP2:Val(1024):Pool(1000)   | 4897      | 486064   | 264   |       7   |
 | sandwich-go/redisson/RESP3:Val(64):Pool(100)      | 4939      | 483098   | 276   |       5   |
-| sandwich-go/redisson/RESP3:Val(64):Pool(1000)     | 4999      | 481544   | 276   |       5   |
 | sandwich-go/redisson/RESP3:Val(256):Pool(100)     | 4928      | 484242   | 280   |       6   |
-| sandwich-go/redisson/RESP3:Val(256):Pool(1000)    | 4860      | 482453   | 280   |       6   |
 | sandwich-go/redisson/RESP3:Val(1024):Pool(100)    | 4968      | 484771   | 280   |       6   |
-| sandwich-go/redisson/RESP3:Val(1024):Pool(1000)   | 4927      | 496207   | 280   |       6   |
 | rueian/rueidis/rueidiscompat:Val(64):Pool(100)    | 4808      | 484878   | 212   |       5   |
-| rueian/rueidis/rueidiscompat:Val(64):Pool(1000)   | 4986      | 486763   | 212   |       5   |
 | rueian/rueidis/rueidiscompat:Val(256):Pool(100)   | 4946      | 485818   | 216   |       6   |
-| rueian/rueidis/rueidiscompat:Val(256):Pool(1000)  | 4922      | 484952   | 216   |       6   |
 | rueian/rueidis/rueidiscompat:Val(1024):Pool(100)  | 4945      | 486969   | 216   |       6   |
-| rueian/rueidis/rueidiscompat:Val(1024):Pool(1000) | 4947      | 488603   | 216   |       6   |
 | go-redis/redis/v8:Val(64):Pool(100)               | 4957      | 482288   | 264   |       7   |
 | go-redis/redis/v8:Val(64):Pool(1000)              | 4899      | 487379   | 264   |       7   |
 | go-redis/redis/v8:Val(256):Pool(100)              | 4897      | 488155   | 264   |       7   |
@@ -89,13 +83,12 @@ Run benchmark using serial and parallel mode.
 | mediocregopher/radix/v4:Val(1024):Pool(100)       | 4530      | 509190   | 915   |       4   |
 | mediocregopher/radix/v4:Val(1024):Pool(1000)      | 4512      | 534769   | 9090  |       36  |
 | joomcode/redispipe:Val(64):Pool(100)              | 1548      | 1558676  | 114   |       6   |
-| joomcode/redispipe:Val(64):Pool(1000)             | 1540      | 1564027  | 114   |       6   |
 | joomcode/redispipe:Val(256):Pool(100)             | 1540      | 1564637  | 114   |       6   |
-| joomcode/redispipe:Val(256):Pool(1000)            | 1527      | 1559428  | 114   |       6   |
 | joomcode/redispipe:Val(1024):Pool(100)            | 1537      | 1556612  | 115   |       6   |
-| joomcode/redispipe:Val(1024):Pool(1000)           | 1536      | 1567739  | 115   |       6   |
 +---------------------------------------------------+-----------+----------+-------+-----------+ 
 ```
+
+![BenchmarkSingleClientSetSerial](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkSingleClientSetSerial.png)                                                                                               
 
 ```markdown
 +---------------------------------------------------+-----------+----------+-------+-----------+
