@@ -17,46 +17,46 @@ Run benchmark using serial and parallel mode.
 ### Benchmarking Result
 #### Single Redis
 ```markdown
-+-------------------------------------------------------------+-----------+---------+------+--------------+
-| Single Serial Get                                           | iteration | ns/op   | B/op | allocs/op    |
-+=============================================================+===========+=========+======+==============+
-| sandwich-go/redisson/RESP2:Key(16):Value(64):Pool(100)      | 4953      | 487019  | 276  |            6 |
-| sandwich-go/redisson/RESP2:Key(16):Value(64):Pool(1000)     | 4978      | 488346  | 276  |            6 |
-| sandwich-go/redisson/RESP2:Key(16):Value(256):Pool(100)     | 4966      | 485089  | 484  |            6 |
-| sandwich-go/redisson/RESP2:Key(16):Value(256):Pool(1000)    | 4916      | 484548  | 484  |            6 |
-| sandwich-go/redisson/RESP2:Key(16):Value(1024):Pool(100)    | 4929      | 487335  | 1348 |            6 |
-| sandwich-go/redisson/RESP2:Key(16):Value(1024):Pool(1000)   | 4933      | 488121  | 1348 |            6 |
-| sandwich-go/redisson/RESP3:Key(16):Value(64):Pool(100)      | 4958      | 485398  | 320  |            4 |
-| sandwich-go/redisson/RESP3:Key(16):Value(64):Pool(1000)     | 4935      | 485190  | 320  |            4 |
-| sandwich-go/redisson/RESP3:Key(16):Value(256):Pool(100)     | 4966      | 484629  | 512  |            4 |
-| sandwich-go/redisson/RESP3:Key(16):Value(256):Pool(1000)    | 4939      | 488952  | 512  |            4 |
-| sandwich-go/redisson/RESP3:Key(16):Value(1024):Pool(100)    | 4954      | 489221  | 1280 |            4 |
-| sandwich-go/redisson/RESP3:Key(16):Value(1024):Pool(1000)   | 4926      | 491789  | 1280 |            4 |
-| rueian/rueidis/rueidiscompat:Key(16):Value(64):Pool(100)    | 4987      | 483422  | 256  |            4 |
-| rueian/rueidis/rueidiscompat:Key(16):Value(64):Pool(1000)   | 4968      | 487068  | 256  |            4 |
-| rueian/rueidis/rueidiscompat:Key(16):Value(256):Pool(100)   | 4986      | 486305  | 448  |            4 |
-| rueian/rueidis/rueidiscompat:Key(16):Value(256):Pool(1000)  | 4924      | 487030  | 448  |            4 |
-| rueian/rueidis/rueidiscompat:Key(16):Value(1024):Pool(100)  | 4922      | 487140  | 1216 |            4 |
-| rueian/rueidis/rueidiscompat:Key(16):Value(1024):Pool(1000) | 4966      | 487747  | 1216 |            4 |
-| go-redis/redis/v8:Key(16):Value(64):Pool(100)               | 4953      | 488424  | 276  |            6 |
-| go-redis/redis/v8:Key(16):Value(64):Pool(1000)              | 4971      | 495383  | 276  |            6 |
-| go-redis/redis/v8:Key(16):Value(256):Pool(100)              | 4981      | 486368  | 484  |            6 |
-| go-redis/redis/v8:Key(16):Value(256):Pool(1000)             | 4936      | 484809  | 484  |            6 |
-| go-redis/redis/v8:Key(16):Value(1024):Pool(100)             | 4887      | 487234  | 1348 |            6 |
-| go-redis/redis/v8:Key(16):Value(1024):Pool(1000)            | 4928      | 496201  | 1348 |            6 |
-| mediocregopher/radix/v4:Key(16):Value(64):Pool(100)         | 4537      | 506352  | 876  |            4 |
-| mediocregopher/radix/v4:Key(16):Value(64):Pool(1000)        | 4512      | 533221  | 8989 |            3 |
-| mediocregopher/radix/v4:Key(16):Value(256):Pool(100)        | 4537      | 510415  | 869  |            4 |
-| mediocregopher/radix/v4:Key(16):Value(256):Pool(1000)       | 4526      | 532493  | 8787 |            3 |
-| mediocregopher/radix/v4:Key(16):Value(1024):Pool(100)       | 4369      | 516728  | 903  |            4 |
-| mediocregopher/radix/v4:Key(16):Value(1024):Pool(1000)      | 4312      | 537812  | 9222 |            3 |
-| joomcode/redispipe:Key(16):Value(64):Pool(100)              | 1546      | 1557321 | 168  |            5 |
-| joomcode/redispipe:Key(16):Value(64):Pool(1000)             | 1540      | 1565308 | 168  |            5 |
-| joomcode/redispipe:Key(16):Value(256):Pool(100)             | 1540      | 1573693 | 376  |            5 |
-| joomcode/redispipe:Key(16):Value(256):Pool(1000)            | 1526      | 1555364 | 376  |            5 |
-| joomcode/redispipe:Key(16):Value(1024):Pool(100)            | 1534      | 1561348 | 1240 |            5 |
-| joomcode/redispipe:Key(16):Value(1024):Pool(1000)           | 1532      | 1561439 | 1240 |            5 |
-+-------------------------------------------------------------+-----------+---------+------+--------------+
++-------------------------------------------------------------+-----------+---------+------+-----------+
+| Single Serial Get                                           | iteration | ns/op   | B/op | allocs/op |
++=============================================================+===========+=========+======+===========+
+| sandwich-go/redisson/RESP2:Key(16):Value(64):Pool(100)      | 4953      | 487019  | 276  |         6 |
+| sandwich-go/redisson/RESP2:Key(16):Value(64):Pool(1000)     | 4978      | 488346  | 276  |         6 |
+| sandwich-go/redisson/RESP2:Key(16):Value(256):Pool(100)     | 4966      | 485089  | 484  |         6 |
+| sandwich-go/redisson/RESP2:Key(16):Value(256):Pool(1000)    | 4916      | 484548  | 484  |         6 |
+| sandwich-go/redisson/RESP2:Key(16):Value(1024):Pool(100)    | 4929      | 487335  | 1348 |         6 |
+| sandwich-go/redisson/RESP2:Key(16):Value(1024):Pool(1000)   | 4933      | 488121  | 1348 |         6 |
+| sandwich-go/redisson/RESP3:Key(16):Value(64):Pool(100)      | 4958      | 485398  | 320  |         4 |
+| sandwich-go/redisson/RESP3:Key(16):Value(64):Pool(1000)     | 4935      | 485190  | 320  |         4 |
+| sandwich-go/redisson/RESP3:Key(16):Value(256):Pool(100)     | 4966      | 484629  | 512  |         4 |
+| sandwich-go/redisson/RESP3:Key(16):Value(256):Pool(1000)    | 4939      | 488952  | 512  |         4 |
+| sandwich-go/redisson/RESP3:Key(16):Value(1024):Pool(100)    | 4954      | 489221  | 1280 |         4 |
+| sandwich-go/redisson/RESP3:Key(16):Value(1024):Pool(1000)   | 4926      | 491789  | 1280 |         4 |
+| rueian/rueidis/rueidiscompat:Key(16):Value(64):Pool(100)    | 4987      | 483422  | 256  |         4 |
+| rueian/rueidis/rueidiscompat:Key(16):Value(64):Pool(1000)   | 4968      | 487068  | 256  |         4 |
+| rueian/rueidis/rueidiscompat:Key(16):Value(256):Pool(100)   | 4986      | 486305  | 448  |         4 |
+| rueian/rueidis/rueidiscompat:Key(16):Value(256):Pool(1000)  | 4924      | 487030  | 448  |         4 |
+| rueian/rueidis/rueidiscompat:Key(16):Value(1024):Pool(100)  | 4922      | 487140  | 1216 |         4 |
+| rueian/rueidis/rueidiscompat:Key(16):Value(1024):Pool(1000) | 4966      | 487747  | 1216 |         4 |
+| go-redis/redis/v8:Key(16):Value(64):Pool(100)               | 4953      | 488424  | 276  |         6 |
+| go-redis/redis/v8:Key(16):Value(64):Pool(1000)              | 4971      | 495383  | 276  |         6 |
+| go-redis/redis/v8:Key(16):Value(256):Pool(100)              | 4981      | 486368  | 484  |         6 |
+| go-redis/redis/v8:Key(16):Value(256):Pool(1000)             | 4936      | 484809  | 484  |         6 |
+| go-redis/redis/v8:Key(16):Value(1024):Pool(100)             | 4887      | 487234  | 1348 |         6 |
+| go-redis/redis/v8:Key(16):Value(1024):Pool(1000)            | 4928      | 496201  | 1348 |         6 |
+| mediocregopher/radix/v4:Key(16):Value(64):Pool(100)         | 4537      | 506352  | 876  |         4 |
+| mediocregopher/radix/v4:Key(16):Value(64):Pool(1000)        | 4512      | 533221  | 8989 |         3 |
+| mediocregopher/radix/v4:Key(16):Value(256):Pool(100)        | 4537      | 510415  | 869  |         4 |
+| mediocregopher/radix/v4:Key(16):Value(256):Pool(1000)       | 4526      | 532493  | 8787 |         3 |
+| mediocregopher/radix/v4:Key(16):Value(1024):Pool(100)       | 4369      | 516728  | 903  |         4 |
+| mediocregopher/radix/v4:Key(16):Value(1024):Pool(1000)      | 4312      | 537812  | 9222 |         3 |
+| joomcode/redispipe:Key(16):Value(64):Pool(100)              | 1546      | 1557321 | 168  |         5 |
+| joomcode/redispipe:Key(16):Value(64):Pool(1000)             | 1540      | 1565308 | 168  |         5 |
+| joomcode/redispipe:Key(16):Value(256):Pool(100)             | 1540      | 1573693 | 376  |         5 |
+| joomcode/redispipe:Key(16):Value(256):Pool(1000)            | 1526      | 1555364 | 376  |         5 |
+| joomcode/redispipe:Key(16):Value(1024):Pool(100)            | 1534      | 1561348 | 1240 |         5 |
+| joomcode/redispipe:Key(16):Value(1024):Pool(1000)           | 1532      | 1561439 | 1240 |         5 |
++-------------------------------------------------------------+-----------+---------+------+-----------+
 ```
 
 ```markdown
