@@ -17,10 +17,16 @@ AWS ElasticCache for Redis，Cache type node `cache.m6g.large`.
 
 ### Benchmarking Option
 
-Max connection pool size 100 and 1000, `sandwich-go/redisson/RESP3`、`rueian/rueidis` and `joomcode/redispipe` only 1 connection.    
+Max connection pool size 100 and 1000, [sandwich-go/redisson/RESP3](https://github.com/sandwich-go/redisson)、[rueian/rueidis](https://github.com/rueian/rueidis) and [joomcode/redispipe](https://github.com/joomcode/redispipe) only 1 connection.    
 Length of Key 16.  
 Length of Value 64、256 and 1024.  
-Run benchmark using serial and parallel mode.
+Run benchmark using serial and parallel mode.  
+
+### Conclusion
+- [joomcode/redispipe](https://github.com/joomcode/redispipe),[sandwich-go/redisson/RESP3](https://github.com/sandwich-go/redisson),[rueian/rueidis](https://github.com/rueian/rueidis) has highest performance in Parallel benchmarks.
+- [joomcode/redispipe](https://github.com/joomcode/redispipe) has lower performance for single-threaded cases.
+- [rueian/rueidis](https://github.com/rueian/rueidis) only supports Redis Server >= 6.x,[sandwich-go/redisson](https://github.com/sandwich-go/redisson) supports all Redis Server version.
+- Recommended to use [sandwich-go/redisson](https://github.com/sandwich-go/redisson), high performance, can switch RESP2/RESP3 protocol by change settings. 
 
 ### Benchmarking Result
 #### Single Redis
@@ -1356,9 +1362,3 @@ Run benchmark using serial and parallel mode.
 ```
      
 ![BenchmarkClusterClientHDelParallel](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkClusterClientHDelParallel.png)
-
-### Conclusion
-- [joomcode/redispipe](https://github.com/joomcode/redispipe),[sandwich-go/redisson/RESP3](https://github.com/sandwich-go/redisson),[rueian/rueidis](https://github.com/rueian/rueidis) has highest performance in Parallel benchmarks.
-- [joomcode/redispipe](https://github.com/joomcode/redispipe) has lower performance for single-threaded cases.
-- [rueian/rueidis](https://github.com/rueian/rueidis) only supports Redis Server >= 6.x,[sandwich-go/redisson](https://github.com/sandwich-go/redisson) supports all Redis Server version.
-- Recommended to use [sandwich-go/redisson](https://github.com/sandwich-go/redisson), high performance, can switch RESP2/RESP3 protocol by change settings. 
