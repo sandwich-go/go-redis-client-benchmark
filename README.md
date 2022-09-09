@@ -1,6 +1,6 @@
 ## Benchmark
 ### Target
-- Benchmarking some popular Redis client libraries for Golang to find the fastest one.
+- Benchmarking some popular Redis client libraries for Golang to find the fastest, and select compatible all Redis version.
 - Comparing [sandwich-go/redisson](https://github.com/sandwich-go/redisson) and other popular Redis Client Library benchmarks tests.
 
 ### Environment
