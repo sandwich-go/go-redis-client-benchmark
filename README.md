@@ -1,4 +1,8 @@
 ## Benchmark
+### Target
+- Benchmarking some popular Redis client libraries for Golang to find the fastest one.
+- Comparing sandwich-go/redisson and other popular Redis Client Library benchmarks tests.
+
 ### Environment
 - [go-redis/redis](https://github.com/go-redis/redis) v8.11.5
 - [joomcode/redispipe](https://github.com/joomcode/redispipe) v0.9.4
@@ -1352,3 +1356,9 @@ Run benchmark using serial and parallel mode.
 ```
      
 ![BenchmarkClusterClientHDelParallel](https://github.com/sandwich-go/go-redis-client-benchmark/blob/master/BenchmarkClusterClientHDelParallel.png)
+
+### Conclusion
+- joomcode/redispipe,sandwich-go/redisson/RESP3,rueian/rueidis has highest performance in Parallel benchmarks.
+- joomcode/redispipe has lower performance for single-threaded cases.
+- rueian/rueidis only supports Redis Server >= 6.x,sandwich-go/redisson supports all Redis Server version.
+- Recommended to use sandwich-go/redisson, high performance, can switch RESP2/RESP3 protocol by change settings. 
