@@ -10,13 +10,14 @@ import (
 
 // Conf should use NewConf to initialize it
 type Conf struct {
-	Addrs      []string `xconf:"addrs" usage:"Redis地址列表"`
-	Cluster    bool     `xconf:"cluster" usage:"是否为Redis集群，默认为false，集群需要设置为true"`
-	MasterName string   `xconf:"master_name" usage:"哨兵模式master名"`
-	KeySizes   []int    `xconf:"key_sizes" usage:"key的大小"`
-	ValueSizes []int    `xconf:"value_sizes" usage:"value的大小"`
-	PoolSizes  []int    `xconf:"pool_sizes" usage:"连接池的大小"`
-	Mode       Mode     `xconf:"mode" usage:"运行模式"`
+	Addrs          []string `xconf:"addrs" usage:"Redis地址列表"`
+	Cluster        bool     `xconf:"cluster" usage:"是否为Redis集群，默认为false，集群需要设置为true"`
+	MasterName     string   `xconf:"master_name" usage:"哨兵模式master名"`
+	KeySizes       []int    `xconf:"key_sizes" usage:"key的大小"`
+	ValueSizes     []int    `xconf:"value_sizes" usage:"value的大小"`
+	PoolSizes      []int    `xconf:"pool_sizes" usage:"连接池的大小"`
+	Mode           Mode     `xconf:"mode" usage:"运行模式"`
+	ParallelNumber int      `xconf:"parallel_number" usage:"如果为parallel mode,并发数"`
 }
 
 // NewConf new Conf
@@ -109,6 +110,15 @@ func WithMode(v Mode) ConfOption {
 	}
 }
 
+// WithParallelNumber 如果为parallel mode,并发数
+func WithParallelNumber(v int) ConfOption {
+	return func(cc *Conf) ConfOption {
+		previous := cc.ParallelNumber
+		cc.ParallelNumber = v
+		return WithParallelNumber(previous)
+	}
+}
+
 // InstallConfWatchDog the installed func will called when NewConf  called
 func InstallConfWatchDog(dog func(cc *Conf)) { watchDogConf = dog }
 
@@ -127,6 +137,7 @@ func newDefaultConf() *Conf {
 		WithValueSizes([]int{64, 256, 1024}...),
 		WithPoolSizes([]int{100, 1000}...),
 		WithMode(ModeSerial),
+		WithParallelNumber(8),
 	} {
 		opt(cc)
 	}
@@ -172,13 +183,14 @@ func AtomicConf() ConfVisitor {
 }
 
 // all getter func
-func (cc *Conf) GetAddrs() []string    { return cc.Addrs }
-func (cc *Conf) GetCluster() bool      { return cc.Cluster }
-func (cc *Conf) GetMasterName() string { return cc.MasterName }
-func (cc *Conf) GetKeySizes() []int    { return cc.KeySizes }
-func (cc *Conf) GetValueSizes() []int  { return cc.ValueSizes }
-func (cc *Conf) GetPoolSizes() []int   { return cc.PoolSizes }
-func (cc *Conf) GetMode() Mode         { return cc.Mode }
+func (cc *Conf) GetAddrs() []string     { return cc.Addrs }
+func (cc *Conf) GetCluster() bool       { return cc.Cluster }
+func (cc *Conf) GetMasterName() string  { return cc.MasterName }
+func (cc *Conf) GetKeySizes() []int     { return cc.KeySizes }
+func (cc *Conf) GetValueSizes() []int   { return cc.ValueSizes }
+func (cc *Conf) GetPoolSizes() []int    { return cc.PoolSizes }
+func (cc *Conf) GetMode() Mode          { return cc.Mode }
+func (cc *Conf) GetParallelNumber() int { return cc.ParallelNumber }
 
 // ConfVisitor visitor interface for Conf
 type ConfVisitor interface {
@@ -189,6 +201,7 @@ type ConfVisitor interface {
 	GetValueSizes() []int
 	GetPoolSizes() []int
 	GetMode() Mode
+	GetParallelNumber() int
 }
 
 // ConfInterface visitor + ApplyOption interface for Conf

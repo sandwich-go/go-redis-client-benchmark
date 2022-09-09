@@ -16,7 +16,6 @@ import (
 	redisConfig "github.com/sandwich-go/go-redis-client-benchmark/config/redis"
 	"github.com/sandwich-go/redisson"
 	"github.com/valyala/fastrand"
-	"runtime"
 	"strings"
 	"testing"
 	"time"
@@ -134,12 +133,13 @@ func newRedissonWithFlushAll(cfg *config.Config, bench Benchmark, resp redisson.
 }
 
 type Benchmark struct {
-	Key           string
-	Val           string
-	PoolSize      int
-	TargetBuilder TargetBuilder
-	RedisMode     RedisMode
-	Mode          redisConfig.Mode
+	Key            string
+	Val            string
+	PoolSize       int
+	TargetBuilder  TargetBuilder
+	RedisMode      RedisMode
+	Mode           redisConfig.Mode
+	ParallelNumber int
 }
 
 type TargetAction func(key, value string) error
@@ -150,9 +150,10 @@ type Target struct {
 }
 
 type TargetBuilder struct {
-	Name  string
-	Check func(Benchmark) bool
-	Make  func(Benchmark) (Target, error)
+	Name   string
+	Check  func(Benchmark) bool
+	Make   func(Benchmark) (Target, error)
+	NoPool bool
 }
 
 func newRedissonRESP2TargetBuilder(cfg *config.Config, before func(redisson.Cmdable, Benchmark) error, make func(redisson.Cmdable) TargetAction) TargetBuilder {
@@ -180,7 +181,8 @@ func newRedissonRESP2TargetBuilder(cfg *config.Config, before func(redisson.Cmda
 
 func newRedissonRESP3CacheTargetBuilder(cfg *config.Config, before func(redisson.Cmdable, Benchmark) error, make func(redisson.CacheCmdable) TargetAction) TargetBuilder {
 	return TargetBuilder{
-		Name: "github.com/sandwich-go/redisson/RESP3/cache",
+		Name:   "github.com/sandwich-go/redisson/RESP3/cache",
+		NoPool: true,
 		Make: func(benchmark Benchmark) (Target, error) {
 			client, err := newRedissonWithFlushAll(cfg, benchmark, redisson.RESP3)
 			if err != nil {
@@ -203,7 +205,8 @@ func newRedissonRESP3CacheTargetBuilder(cfg *config.Config, before func(redisson
 
 func newRedissonRESP3TargetBuilder(cfg *config.Config, before func(redisson.Cmdable, Benchmark) error, make func(redisson.Cmdable) TargetAction) TargetBuilder {
 	return TargetBuilder{
-		Name: "github.com/sandwich-go/redisson/RESP3",
+		Name:   "github.com/sandwich-go/redisson/RESP3",
+		NoPool: true,
 		Make: func(benchmark Benchmark) (Target, error) {
 			client, err := newRedissonWithFlushAll(cfg, benchmark, redisson.RESP3)
 			if err != nil {
@@ -258,7 +261,8 @@ func newRueidisWithFlushAll(cfg *config.Config) (rueidiscompat.Cmdable, rueidis.
 
 func newRueidisCacheTargetBuilder(cfg *config.Config, before func(rueidiscompat.Cmdable, Benchmark) error, make func(rueidiscompat.CacheCompat) TargetAction) TargetBuilder {
 	return TargetBuilder{
-		Name: "github.com/rueian/rueidis/rueidiscompat/cache",
+		Name:   "github.com/rueian/rueidis/rueidiscompat/cache",
+		NoPool: true,
 		Make: func(benchmark Benchmark) (Target, error) {
 			adapter, client, err := newRueidisWithFlushAll(cfg)
 			if err != nil {
@@ -279,7 +283,8 @@ func newRueidisCacheTargetBuilder(cfg *config.Config, before func(rueidiscompat.
 
 func newRueidisTargetBuilder(cfg *config.Config, before func(rueidiscompat.Cmdable, Benchmark) error, make func(rueidiscompat.Cmdable) TargetAction) TargetBuilder {
 	return TargetBuilder{
-		Name: "github.com/rueian/rueidis/rueidiscompat",
+		Name:   "github.com/rueian/rueidis/rueidiscompat",
+		NoPool: true,
 		Make: func(benchmark Benchmark) (Target, error) {
 			adapter, client, err := newRueidisWithFlushAll(cfg)
 			if err != nil {
@@ -419,7 +424,8 @@ func newRadixTargetBuilder(cfg *config.Config, before func(radixClient, Benchmar
 
 func newRedispipeTargetBuilder(cfg *config.Config, before func(redispipe.Sender, Benchmark) error, make func(redispipe.Sender) TargetAction) TargetBuilder {
 	return TargetBuilder{
-		Name: "github.com/joomcode/redispipe",
+		Name:   "github.com/joomcode/redispipe",
+		NoPool: true,
 		Make: func(benchmark Benchmark) (Target, error) {
 			var err error
 			var client redispipe.Sender
@@ -497,7 +503,14 @@ func compose(c *config.Config, builders []TargetBuilder) []Benchmark {
 			for _, v := range c.GetRedis().GetValueSizes() {
 				val := gen(v)
 				for _, poolSize := range c.GetRedis().GetPoolSizes() {
-					benchmarks = append(benchmarks, Benchmark{Key: key, Val: val, PoolSize: poolSize, TargetBuilder: builder, RedisMode: redisMode, Mode: getRunMode(c)})
+					benchmark := Benchmark{Key: key, Val: val, TargetBuilder: builder, RedisMode: redisMode, Mode: getRunMode(c), ParallelNumber: c.GetRedis().GetParallelNumber()}
+					if !builder.NoPool {
+						benchmark.PoolSize = poolSize
+					}
+					benchmarks = append(benchmarks, benchmark)
+					if builder.NoPool {
+						break
+					}
 				}
 			}
 		}
@@ -513,22 +526,22 @@ func runBenchmark(b *testing.B, benchmarks []Benchmark) {
 				continue
 			}
 		}
-		var parallel = 0
-		var modeString string
-		switch bc.Mode {
-		case redisConfig.ModeSerial:
-			modeString = "Serial"
-		case redisConfig.ModeParallel:
-			parallel = runtime.GOMAXPROCS(0) * 2
-			modeString = fmt.Sprintf("Parallel(%d)", parallel)
+		name := fmt.Sprintf("%s:%s:Key(%d):Val(%d)", bc.TargetBuilder.Name, bc.RedisMode, len(bc.Key), len(bc.Val))
+		if bc.PoolSize > 0 {
+			name = fmt.Sprintf("%s:Pool(%d)", name, bc.PoolSize)
 		}
-		b.Run(fmt.Sprintf("%s:%s:Key(%d):Value(%d):Pool(%d):%s", bc.TargetBuilder.Name, bc.RedisMode, len(bc.Key), len(bc.Val), bc.PoolSize, modeString), func(b *testing.B) {
+		if bc.Mode == redisConfig.ModeParallel && bc.ParallelNumber > 0 {
+			name += fmt.Sprintf(":Parallel(%d)", bc.ParallelNumber)
+		} else {
+			name += ":Serial"
+		}
+		b.Run(name, func(b *testing.B) {
 			target, err := bc.TargetBuilder.Make(bc)
 			if err != nil {
 				b.Fatalf("%s setup fail: %v", bc.TargetBuilder.Name, err)
 			}
-			if parallel > 0 {
-				b.SetParallelism(parallel)
+			if bc.ParallelNumber > 0 {
+				b.SetParallelism(bc.ParallelNumber)
 				b.ResetTimer()
 				b.RunParallel(func(pb *testing.PB) {
 					for pb.Next() {

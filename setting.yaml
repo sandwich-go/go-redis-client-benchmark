@@ -13,3 +13,4 @@ redis:
     - 100
     - 1000
   mode: serial
+  parallel_number: 8
