@@ -1,7 +1,7 @@
 ## Benchmark
 ### Target
 - Benchmarking some popular Redis client libraries for Golang to find the fastest, and select one can supports ALL Redis Server Versions.
-- Comparing [sandwich-go/redisson](https://github.com/sandwich-go/redisson) and other popular Redis Client Library benchmarks tests.
+- Comparison of [sandwich-go/redisson](https://github.com/sandwich-go/redisson) and other popular used Redis Client Library.
 
 ### Environment
 - [go-redis/redis](https://github.com/go-redis/redis) v8.11.5
@@ -22,11 +22,11 @@ Length of Key 16.
 Length of Value 64、256 and 1024.  
 Run benchmark using serial and parallel mode.  
 
-### Conclusion
-- [joomcode/redispipe](https://github.com/joomcode/redispipe),[sandwich-go/redisson/RESP3](https://github.com/sandwich-go/redisson),[rueian/rueidis](https://github.com/rueian/rueidis) has highest performance in Parallel benchmarks.
-- [joomcode/redispipe](https://github.com/joomcode/redispipe) has lower performance for single-threaded cases.
+### Summary
+- [joomcode/redispipe](https://github.com/joomcode/redispipe),[sandwich-go/redisson/RESP3](https://github.com/sandwich-go/redisson),[rueian/rueidis](https://github.com/rueian/rueidis) have the highest performance in Parallel benchmarks.
+- [joomcode/redispipe](https://github.com/joomcode/redispipe) has lower performance for single threaded cases.
 - [rueian/rueidis](https://github.com/rueian/rueidis) only supports Redis Server >= 6.x,[sandwich-go/redisson](https://github.com/sandwich-go/redisson) supports ALL Redis Server Versions.
-- Recommended to use [sandwich-go/redisson](https://github.com/sandwich-go/redisson), high performance, can switch RESP2/RESP3 protocol by change settings. 
+- Recommend using [sandwich-go/redisson](https://github.com/sandwich-go/redisson), high performance, you can switch freely between RESP2/RESP3. 
 
 ### Benchmarking Result
 #### Single Redis
